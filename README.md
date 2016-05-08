@@ -1,6 +1,6 @@
 README
 ======
-This project uses the movielens dataset to train an recomender system. The system takes as input movie category weights and outputs an age group and gender prediction. A use case could be movie marketers who
+This project uses the movielens dataset to train a very simple suggestion system. The system takes as input movie category weights and outputs an age group and gender prediction. A use case could be movie marketers who
 want to know where to target their campaigns for a certain film (ex. in promoted facebook pages you can target certain groups).
 
 DEPENDENCIES
