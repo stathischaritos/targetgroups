@@ -17,7 +17,8 @@ You need to run data.py to preprocess the data and train.py to train the models.
 
 USAGE
 =====
+The models need an input vector of weights for each movie category/genre. The genres are all inside u.genre. 
 
-example:
+example(random):
 
     http://localhost:5000/suggest?input=0.1,0.2,0.5,0.0,1.0,0.2,0.0,0.0,0.0,0.2,0.1,0.2,0.5,0.0,1.0,0.2,0.0,0.0,0.0
