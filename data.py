@@ -2,6 +2,7 @@ import csv
 import pickle
 from sklearn import preprocessing
 import numpy as np
+from sklearn.decomposition import PCA
 
 #Load Data
 csvfile = open('ml-100k/u.item')
@@ -21,6 +22,7 @@ occupations = [occupation['occupation'] for occupation in csv.DictReader(csvfile
 
 #Define age groups
 age_groups = [[0,30],[30,100]]
+N_COMP = 9
 
 #Transform to vector.
 X = []
@@ -41,23 +43,21 @@ for rating in ratings:
     
     #Labels
     y_age = int(user['age'])
-    
-    if y_age < 30:
-        count1 += 1
-        
     y_age = [ index for index,age_group in enumerate(age_groups) if ( y_age >= age_group[0] and y_age < age_group[1] ) ][0]
     Y_age.append(y_age)
     
-    y_gender = 1 if user['gender'] == 'M' else 0
+    y_gender = 0 if user['gender'] == 'M' else 1
     Y_gender.append(y_gender)
     
-    if y_gender == 1:
-        count2 += 1
 
-print count1, count2
+#reduce dimensions and persist in storage
+X = np.array(X)
+X = preprocessing.scale(X)
+pca = PCA(n_components=N_COMP, whiten=True)
+pca.fit(X)
+X = pca.transform(X)
 
-#Scale and persist in storage
-X = preprocessing.scale(np.array(X))
 Y_age = np.array(Y_age)
 Y_gender = np.array(Y_gender)
-pickle.dump( (X, Y_age, Y_gender), open( "data.pkl", "wb" ) )
+
+pickle.dump( (X, Y_age, Y_gender, pca), open( "data.pkl", "wb" ) )
