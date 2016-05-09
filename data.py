@@ -20,12 +20,14 @@ csvfile = open('ml-100k/u.occupation')
 occupations = [occupation['occupation'] for occupation in csv.DictReader(csvfile) ]
 
 #Define age groups
-age_groups = [[0,30],[30,50],[50,1000]]
+age_groups = [[0,30],[30,100]]
 
 #Transform to vector.
 X = []
 Y_age = []
 Y_gender = []
+count1 = 0
+count2 = 0
 for rating in ratings:
     #Get user and movie info
     user_id = rating['user_id']
@@ -39,11 +41,20 @@ for rating in ratings:
     
     #Labels
     y_age = int(user['age'])
+    
+    if y_age < 30:
+        count1 += 1
+        
     y_age = [ index for index,age_group in enumerate(age_groups) if ( y_age >= age_group[0] and y_age < age_group[1] ) ][0]
     Y_age.append(y_age)
     
     y_gender = 1 if user['gender'] == 'M' else 0
     Y_gender.append(y_gender)
+    
+    if y_gender == 1:
+        count2 += 1
+
+print count1, count2
 
 #Scale and persist in storage
 X = preprocessing.scale(np.array(X))

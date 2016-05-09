@@ -1,7 +1,7 @@
 README
 ======
 This project uses the movielens dataset to train a very simple suggestion system. The system takes as input movie category weights and outputs an age group and gender prediction. A use case could be movie marketers who
-want to know where to target their campaigns for a certain film (ex. in promoted facebook pages you can target certain groups). Accuracy is arround 75% for gender and is variable for the age groups depending on how you define them (for 3 age groups we get around 50% accuracy which is not optimal but significant).
+want to know where to target their campaigns for a certain film (ex. in promoted facebook pages you can target certain groups).
 
 DEPENDENCIES
 ============
